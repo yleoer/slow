@@ -39,5 +39,15 @@ spec:
         httpGet:
           port: 8080
           path: /ready
+      lifecycle:
+        postStart:
+          exec:
+            command:
+              - sh
+              - -c
+              - 'mkdir /root/data/'
+        preStop:
+          sleep:
+            seconds: 10
   restartPolicy: Always
   
