@@ -145,7 +145,7 @@ func readyHandler(s *ServerState) http.HandlerFunc {
 
 func debugHandler(s *ServerState) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		action := r.URL.Path[len("/debug"):]
+		action := r.URL.Path[len("/debug/"):]
 
 		switch action {
 		case "healthy":
