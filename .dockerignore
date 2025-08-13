@@ -1,0 +1,11 @@
+.git
+.github
+
+.gitignore
+.dockerignore
+
+Dockerfile
+
+.idea
+
+*.md
