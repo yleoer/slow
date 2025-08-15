@@ -89,6 +89,7 @@ func main() {
 
 	mux := http.NewServeMux()
 
+	mux.HandleFunc("/ping", pingHandler())
 	mux.HandleFunc("/healthy", healthHandler(state))
 	mux.HandleFunc("/ready", readyHandler(state))
 	mux.HandleFunc("/debug/", debugHandler(state))
@@ -117,6 +118,16 @@ func main() {
 		log.Fatalf("Server forced to shutdown: %v", err)
 	}
 	log.Println("Server exiting.")
+}
+
+var ping int
+
+func pingHandler() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		ping++
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprintf(w, "ping: %d", ping)
+	}
 }
 
 func healthHandler(s *ServerState) http.HandlerFunc {
